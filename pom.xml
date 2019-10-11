@@ -31,6 +31,16 @@
     <artifactId>fpc-cookie</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
+    <name>FPC Cookie</name>
+    <description>RFC6265 Compliant Cookie Manager</description>
+
+    <scm>
+        <connection>scm:git:git@github.com:baracil/fpc-cookie.git</connection>
+        <developerConnection>scm:git:git@github.com:baracil/fpc-cookie.git</developerConnection>
+        <url>https://github.com/baracil/fpc-cookie.git</url>
+        <tag>HEAD</tag>
+    </scm>
+
     <properties>
         <lombok.version>1.18.10</lombok.version>
         <mapstruct.version>1.3.0.Final</mapstruct.version>
