@@ -28,7 +28,7 @@
 
     <groupId>net.femtoparsec.cookie</groupId>
     <artifactId>fpc-cookie</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.1</version>
 
     <name>FPC Cookie</name>
     <description>RFC6265 Compliant Cookie Manager</description>
@@ -37,7 +37,7 @@
         <connection>scm:git:git@github.com:baracil/fpc-cookie.git</connection>
         <developerConnection>scm:git:git@github.com:baracil/fpc-cookie.git</developerConnection>
         <url>https://github.com/baracil/fpc-cookie.git</url>
-        <tag>HEAD</tag>
+        <tag>1.0.1</tag>
     </scm>
 
     <properties>
