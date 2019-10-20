@@ -26,6 +26,7 @@ package net.femtoparsec.cookie;
 
 import lombok.*;
 
+import java.beans.Transient;
 import java.time.Instant;
 import java.util.Comparator;
 
@@ -68,6 +69,7 @@ public class Cookie {
         return path.length();
     }
 
+    @Transient
     public boolean isPersistent() {
         return expiryTime != null;
     }
