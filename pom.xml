@@ -125,7 +125,7 @@
                         <goals>
                             <goal>aggregate-jar</goal>
                         </goals>
-                        <phase>package</phase>
+                        <phase>none</phase>
                         <configuration>
                             <javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>
                         </configuration>
