@@ -54,8 +54,10 @@ public enum CookieAttribute {
         this.setter = (b,s) -> setter.accept(b);
     }
 
-    <T> CookieAttribute(@NonNull String attributeName, @NonNull Function<? super String,? extends Optional<? extends T>> transformer, @NonNull
-            BiConsumer<? super CookieData,? super T> setter) {
+    <T> CookieAttribute(@NonNull String attributeName,
+            @NonNull Function<? super String,? extends Optional<? extends T>> transformer,
+            @NonNull BiConsumer<? super CookieData,? super T> setter
+    ) {
         this.attributeName = attributeName;
         this.setter = (b,s) -> {
             final Optional<? extends T> result = transformer.apply(s);

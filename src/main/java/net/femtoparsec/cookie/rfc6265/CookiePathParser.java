@@ -35,16 +35,17 @@ public class CookiePathParser {
 
     @NonNull
     public static Optional<String> parse(@NonNull String value) {
-        return Optional.ofNullable(new CookiePathParser(value).parse());
+        return new CookiePathParser(value).parse();
     }
 
     @NonNull
     private final String value;
 
-    private String parse() {
+    @NonNull
+    private Optional<String> parse() {
         if (value.isEmpty() || !value.startsWith("/")) {
-            return null;
+            return Optional.empty();
         }
-        return value;
+        return Optional.of(value);
     }
 }

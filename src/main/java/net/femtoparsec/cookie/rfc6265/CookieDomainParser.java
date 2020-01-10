@@ -35,20 +35,21 @@ public class CookieDomainParser {
 
     @NonNull
     public static Optional<String> parse(@NonNull String value) {
-        return Optional.ofNullable(new CookieDomainParser(value.strip()).parse());
+        return new CookieDomainParser(value.strip()).parse();
     }
 
     @NonNull
     private final String domain;
 
-    private String parse() {
+    @NonNull
+    private Optional<String> parse() {
         if (domain.isEmpty()) {
-            return null;
+            return Optional.empty();
         }
         if (domain.startsWith(".")) {
-            return domain.substring(1).toLowerCase();
+            return Optional.of(domain.substring(1).toLowerCase());
         }
-        return domain.toLowerCase();
+        return Optional.of(domain.toLowerCase());
 
     }
 }

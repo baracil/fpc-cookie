@@ -42,7 +42,7 @@ public class CookieDateParser {
 
     @NonNull
     public static Optional<Instant> parse(@NonNull String cookieDate) {
-        return Optional.ofNullable(new CookieDateParser(cookieDate).parse());
+        return new CookieDateParser(cookieDate).parse();
     }
 
     private static final Pattern DELIMITER = Pattern.compile("[\\x09\\x20-\\x2F\\x3B-\\x40\\x5B-\\x60\\x7B-\\x7E]");
@@ -74,7 +74,8 @@ public class CookieDateParser {
 
     private boolean invalid = false;
 
-    private Instant parse() {
+    @NonNull
+    private Optional<Instant> parse() {
         final String[] dateTokens = DELIMITER.split(cookieDate);
         for (String dateToken : dateTokens) {
             if (invalid) {
@@ -84,13 +85,15 @@ public class CookieDateParser {
         }
 
         if (invalid) {
-            return null;
+            return Optional.empty();
         }
         if (hour == null || minute == null || second == null || dayOfMonth == null || month == null ||year == null) {
-            return null;
+            return Optional.empty();
         }
 
-        return ZonedDateTime.of(year, month.getValue(), dayOfMonth, hour, minute, second, 0, ZoneOffset.UTC).toInstant();
+        return Optional.of(
+                ZonedDateTime.of(year, month.getValue(), dayOfMonth, hour, minute, second, 0, ZoneOffset.UTC).toInstant()
+        );
     }
 
     private void parseOnToken(String token) {

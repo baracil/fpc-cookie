@@ -36,8 +36,7 @@ public class SetCookieStringParser {
 
     @NonNull
     public static Optional<CookieData> parse(@NonNull String setCookieString) {
-        final CookieData info = new SetCookieStringParser(setCookieString.split(";")).parse();
-        return Optional.ofNullable(info);
+        return new SetCookieStringParser(setCookieString.split(";")).parse();
     }
 
     @NonNull
@@ -50,9 +49,10 @@ public class SetCookieStringParser {
 
     private final CookieData info = new CookieData();
 
-    private CookieData parse() {
+    @NonNull
+    private Optional<CookieData> parse() {
         if (tokens.length == 0) {
-            return null;
+            return Optional.empty();
         }
         this.parseNameAndValue(tokens[0]);
         this.splitAllAttributes();
@@ -63,7 +63,7 @@ public class SetCookieStringParser {
             this.handleOneAttribute(entry.getKey(),entry.getValue());
         }
 
-        return skipped?null:info;
+        return skipped?Optional.empty():Optional.of(info);
     }
 
     private void parseNameAndValue(String nameValue) {

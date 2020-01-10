@@ -39,7 +39,7 @@ public class CookieOwnershipTester {
         return domainMatch(cookie) && pathMatch(cookie) && securedMatch(cookie) && httpOnlyMatch(cookie);
     }
 
-    private boolean domainMatch(Cookie cookie) {
+    private boolean domainMatch(@NonNull Cookie cookie) {
         if (cookie.hostOnly()) {
             return cookie.domain().equalsIgnoreCase(requestInfo.hostName());
         } else {

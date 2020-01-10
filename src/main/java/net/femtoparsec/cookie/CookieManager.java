@@ -48,6 +48,7 @@ public class CookieManager extends CookieHandler {
      * @param cookieStore the cookie store to use
      * @return a {@link CookieHandler} that can be used with {@link CookieHandler#setDefault(CookieHandler)}
      */
+    @NonNull
     public static CookieManager create(@NonNull CookieStore cookieStore) {
         return new CookieManager(cookieStore, null);
     }
@@ -58,6 +59,7 @@ public class CookieManager extends CookieHandler {
      * @param publicSuffixTester a predicate to test if domain of a cookie is a public suffix
      * @return a {@link CookieHandler} that can be used with {@link CookieHandler#setDefault(CookieHandler)}
      */
+    @NonNull
     public static CookieManager create(@NonNull CookieStore cookieStore, @NonNull Predicate<String> publicSuffixTester) {
         return new CookieManager(cookieStore,publicSuffixTester);
     }
@@ -66,6 +68,7 @@ public class CookieManager extends CookieHandler {
      * Create a new cookie manager using the default cookie store
      * @return a {@link CookieHandler} that can be used with {@link CookieHandler#setDefault(CookieHandler)}
      */
+    @NonNull
     public static CookieManager create() {
         return create(new InMemoryCookieStore());
     }
@@ -75,6 +78,7 @@ public class CookieManager extends CookieHandler {
      * @param publicSuffixTester a predicate to test if domain of a cookie is a public suffix
      * @return a {@link CookieHandler} that can be used with {@link CookieHandler#setDefault(CookieHandler)}
      */
+    @NonNull
     public static CookieManager create(@NonNull Predicate<String> publicSuffixTester) {
         return create(new InMemoryCookieStore(),publicSuffixTester);
     }

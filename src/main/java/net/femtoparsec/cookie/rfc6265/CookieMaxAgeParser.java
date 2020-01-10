@@ -35,8 +35,9 @@ import java.util.regex.Pattern;
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class CookieMaxAgeParser  {
 
+    @NonNull
     public static Optional<Long> parse(@NonNull String value) {
-        return Optional.ofNullable(new CookieMaxAgeParser(value).parse());
+        return new CookieMaxAgeParser(value).parse();
     }
 
     private static final Pattern MAX_AGE_PATTERN = Pattern.compile("-?\\d+");
@@ -44,12 +45,12 @@ public class CookieMaxAgeParser  {
     @NonNull
     private final String value;
 
-    private Long parse() {
+    private Optional<Long> parse() {
         final Matcher matcher = MAX_AGE_PATTERN.matcher(value);
         if (matcher.matches()) {
-            return Long.parseLong(value);
+            return Optional.of(Long.parseLong(value));
         }
-        return null;
+        return Optional.empty();
     }
 
 }

@@ -37,10 +37,12 @@ import java.util.function.Predicate;
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class CookieParser {
 
+    @NonNull
     public static CookieParser create(@NonNull RequestInfo request) {
         return new CookieParser(request, null);
     }
 
+    @NonNull
     public static CookieParser create(@NonNull RequestInfo request, @NonNull Predicate<String> publicSuffixTester) {
         return new CookieParser(request,publicSuffixTester);
     }
@@ -54,10 +56,11 @@ public class CookieParser {
 
     @NonNull
     public Optional<Cookie> parse(@NonNull String setCookieString) {
-        return SetCookieStringParser.parse(setCookieString).map(this::finalizeCookie);
+        return SetCookieStringParser.parse(setCookieString).flatMap(this::finalizeCookie);
     }
 
-    private Cookie finalizeCookie(CookieData info) {
+    @NonNull
+    private Optional<Cookie> finalizeCookie(@NonNull CookieData info) {
         final Cookie.Builder builder = Cookie.builder();
 
         builder.name(info.name())
@@ -75,7 +78,7 @@ public class CookieParser {
 
         String domain = computeDomain(info.domain());
         if (domain == null) {
-            return null;
+            return Optional.empty();
         }
         if (domain.isEmpty()) {
             builder.hostOnly(true);
@@ -93,10 +96,10 @@ public class CookieParser {
         }
 
         if (info.httpOnly() && !requestInfo.http()) {
-            return null;
+            return Optional.empty();
         }
 
-        return builder.build();
+        return Optional.of(builder.build());
 
     }
 
